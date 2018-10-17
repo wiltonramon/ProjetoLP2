@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Produto.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ProdutoStoreContainer">
+    <EntitySet Name="ProdutoSet1" EntityType="Produto.Store.ProdutoSet1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategoriaSet" EntityType="Produto.Store.CategoriaSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ProdutoCategoria" Association="Produto.Store.ProdutoCategoria">
+      <End Role="Produto" EntitySet="ProdutoSet1" />
+      <End Role="Categoria" EntitySet="CategoriaSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ProdutoSet1">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Preco" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CategoriaCodigoCategoria" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategoriaSet">
+    <Key>
+      <PropertyRef Name="CodigoCategoria" />
+    </Key>
+    <Property Name="CodigoCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomeCategoria" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="ProdutoCategoria">
+    <End Role="Produto" Type="Produto.Store.ProdutoSet1" Multiplicity="*" />
+    <End Role="Categoria" Type="Produto.Store.CategoriaSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="CodigoCategoria" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="CategoriaCodigoCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
